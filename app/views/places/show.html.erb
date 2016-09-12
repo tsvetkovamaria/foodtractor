@@ -4,32 +4,33 @@
       <h1><%= @place.name %></h1>
       <p><%= @place.description %></p>
       <p>This place has <%= @place.dishes.count %> dishes</p>
-
-      <% @place.dishes.each do |dish| %>
       <div class="row">
-        <div class="col-md-3">
+        <% @place.dishes.each do |dish| %>
+
+        <div class="col-md-3 dish-card">
           <h3><%= dish.name %></h3>
           <div>
-            <%= image_tag dish.image.url(:medium) %>
+            <%= image_tag dish.image.url(:medium), class: 'img-responsive' %>
           </div>
           <br>
           <p><%= dish.price %> $</p>
           <p><%= link_to "Add to cart", add_to_cart_path(dish), method: :post %></p>
         </div>
+
+        <% end %>
       </div>
-      <% end %>
     </div>
     <div class="col-md-3">
       <h2>Cart</h2>
       <% if user_signed_in? %>
 
-        <% @cart.cart_items.each do |item|  %>
-          <h3> <%= item.dish.name %> </h3>
-          <p> <%= item.dish.price %>$ X <%= item.amount %> = <%= item.dish.price * item.amount %>$ </p>
-          <%= link_to "Remove", remove_from_cart_path(item), method: :delete %>
-        <% end %>
-        <hr>
-        <p>Total price: <%= @sum %></p>
+      <% @cart.cart_items.each do |item|  %>
+      <h3> <%= item.dish.name %> </h3>
+      <p> <%= item.dish.price %>$ X <%= item.amount %> = <%= item.dish.price * item.amount %>$ </p>
+      <%= link_to "Remove", remove_from_cart_path(item), method: :delete %>
+      <% end %>
+      <hr>
+      <p>Total price: <%= @sum %></p>
       <% else %>
       <p>Please log in to add to cart</p>
       <% end %>
