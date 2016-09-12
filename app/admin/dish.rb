@@ -12,13 +12,12 @@ ActiveAdmin.register Dish do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-  permit_params :name, :price, :image, :place
+  permit_params :name, :price, :image, :place_id
 
   form do |f|
     f.inputs do
-      # f.collection_select :place_id, Place.all(:id, :theme, {prompt: 'Выберите занятия для раздатки'}, { class: 'ui search fluid dropdown' }
       f.input :name
-      f.input :place
+      f.input :place_id, :label => "Select a place:", :as => :select, :collection => Place.all
       f.input :price
       f.input :image, :as => :file
     end
@@ -34,6 +33,7 @@ ActiveAdmin.register Dish do
     column :name do |dish|
       link_to dish.name, admin_dish_path(dish)
     end
+    column :place_id
     column :price
     actions
   end
@@ -44,6 +44,7 @@ ActiveAdmin.register Dish do
        image_tag dish.image.url(:medium)
       end
       row :name
+      row :place_id
       row :price
     end
     active_admin_comments

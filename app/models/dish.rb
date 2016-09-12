@@ -1,4 +1,5 @@
 class Dish < ApplicationRecord
+  
   belongs_to :place
 
   has_attached_file :image, 

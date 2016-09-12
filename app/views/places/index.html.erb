@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <% @places.each do |place| %>
+        <h2><%= link_to place.name, show_place_path(place) %></h2>
+        <p><%= place.description %></p>
+      <% end %>
+    </div>
+  </div>
+</div>
