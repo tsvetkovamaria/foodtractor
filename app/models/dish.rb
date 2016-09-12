@@ -1,6 +1,8 @@
 class Dish < ApplicationRecord
   
   belongs_to :place
+  has_many :cart_items, dependent: :destroy
+  has_many :carts, through: :cart_items
 
   has_attached_file :image, 
                     styles: { medium: "300x300>", thumb: "100x100>" }, 

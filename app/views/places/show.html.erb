@@ -1,17 +1,34 @@
 <div class="container">
-  <h1><%= @place.name %></h1>
-  <p><%= @place.description %></p>
-  <p><%= @place.dishes.count %></p>
   <div class="row">
-    <% @place.dishes.each do |dish| %>
-    <div class="col-md-3">
-      <h3><%= dish.name %></h3>
-      <div>
-        <%= image_tag dish.image.url(:medium) %>
+    <div class="col-md-9">
+      <h1><%= @place.name %></h1>
+      <p><%= @place.description %></p>
+      <p><%= @place.dishes.count %></p>
+
+      <% @place.dishes.each do |dish| %>
+      <div class="row">
+        <div class="col-md-3">
+          <h3><%= dish.name %></h3>
+          <div>
+            <%= image_tag dish.image.url(:medium) %>
+          </div>
+          <br>
+          <p><%= dish.price %> $</p>
+          <p><%= link_to "Add to cart", add_to_cart_path(dish), method: :post %></p>
+        </div>
       </div>
-      <br>
-      <p><%= dish.price %> $</p>
+      <% end %>
     </div>
-    <% end %>
+    <div class="col-md-3">
+      <h2>Cart</h2>
+      <% if user_signed_in? %>
+        <% @cart.cart_items.each do |item|  %>
+          <h3> <%= item.dish.name %> </h3>
+          <p> <%= item.dish.price %>$ X <%= item.amount %> = <%= item.dish.price * item.amount %>$ </p>
+        <% end %>
+      <% else %>
+      <p>Please log in to add to cart</p>
+      <% end %>
+    </div>
   </div>
 </div>
