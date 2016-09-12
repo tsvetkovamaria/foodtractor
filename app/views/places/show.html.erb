@@ -2,4 +2,16 @@
   <h1><%= @place.name %></h1>
   <p><%= @place.description %></p>
   <p><%= @place.dishes.count %></p>
+  <div class="row">
+    <% @place.dishes.each do |dish| %>
+    <div class="col-md-3">
+      <h3><%= dish.name %></h3>
+      <div>
+        <%= image_tag dish.image.url(:medium) %>
+      </div>
+      <br>
+      <p><%= dish.price %> $</p>
+    </div>
+    <% end %>
+  </div>
 </div>
