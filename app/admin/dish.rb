@@ -12,13 +12,15 @@ ActiveAdmin.register Dish do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-  permit_params :name, :price, :image
+  permit_params :name, :price, :image, :place
 
   form do |f|
     f.inputs do
+      # f.collection_select :place_id, Place.all(:id, :theme, {prompt: 'Выберите занятия для раздатки'}, { class: 'ui search fluid dropdown' }
       f.input :name
+      f.input :place
       f.input :price
-      f.input :image, :as => :file, :hint => image_tag(f.object.image.url(:thumb))
+      f.input :image, :as => :file
     end
     f.actions
   end

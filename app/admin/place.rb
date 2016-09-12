@@ -13,5 +13,5 @@ ActiveAdmin.register Place do
 #   permitted
 # end
 
-
+permit_params :name, :description
 end
