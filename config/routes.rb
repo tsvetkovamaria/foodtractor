@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 
   match "carts/:id/add" => "carts#add", :via => :post, :as => :add_to_cart
 
+  match "carts/:id/remove" => "carts#remove", :via => :delete, :as => :remove_from_cart
+
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

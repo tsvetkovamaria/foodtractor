@@ -19,4 +19,10 @@ class CartsController < ApplicationController
     redirect_to :back
   end
 
+  def remove
+    cart_item = CartItem.find(params[:id])
+    cart_item.destroy
+    redirect_to :back
+  end
+
 end

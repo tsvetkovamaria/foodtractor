@@ -3,7 +3,7 @@
     <div class="col-md-9">
       <h1><%= @place.name %></h1>
       <p><%= @place.description %></p>
-      <p><%= @place.dishes.count %></p>
+      <p>This place has <%= @place.dishes.count %> dishes</p>
 
       <% @place.dishes.each do |dish| %>
       <div class="row">
@@ -22,10 +22,14 @@
     <div class="col-md-3">
       <h2>Cart</h2>
       <% if user_signed_in? %>
+
         <% @cart.cart_items.each do |item|  %>
           <h3> <%= item.dish.name %> </h3>
           <p> <%= item.dish.price %>$ X <%= item.amount %> = <%= item.dish.price * item.amount %>$ </p>
+          <%= link_to "Remove", remove_from_cart_path(item), method: :delete %>
         <% end %>
+        <hr>
+        <p>Total price: <%= @sum %></p>
       <% else %>
       <p>Please log in to add to cart</p>
       <% end %>
